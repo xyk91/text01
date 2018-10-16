@@ -12,19 +12,23 @@
     C页
     <script src="js/jquery-1.10.2.min.js"></script>
     <script>
-        $(function () {
-            pushHistory();
-            window.addEventListener("popstate", function (e) {
-                alert("我监听到了浏览器的返回按钮事件啦");//根据自己的需求实现自己的功能
-                location.replace('index.html');
-            }, false);
-            function pushHistory() {
-                var state = {
-                    title: "title",
-                    url: "#"
-                };
-                window.history.pushState(state, "title", "#");
+        $(document).ready(function () {
+
+            　　if (window.history && window.history.pushState) {
+
+                　　　　$(window).on('popstate', function () {
+
+                    window.history.pushState('forward', null, '#');
+
+                    window.history.forward(1);
+                });
+
             }
+
+            window.history.pushState('forward', null, '#'); //在IE中必须得有这两行
+
+            window.history.forward(1);
+
         });
     </script>
 </body>
